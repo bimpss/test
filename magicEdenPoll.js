@@ -12,7 +12,7 @@ async function pollSales() {
 
     try {
       const res = await axios.get(url);
-      const buys = res.data.filter(tx => tx.type === "buyNow");
+      const buys = res.data.filter(tx => ["buyNow", "exchange", "sweep"].includes(tx.type));
 
       console.log(`✅ [${slug}] ${buys.length} new sale(s)`);
 
