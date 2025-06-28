@@ -5,28 +5,23 @@ const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 if (!TELEGRAM_TOKEN || !CHAT_ID) {
-  console.error("❌ Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID in environment.");
+  console.error("❌ Missing Telegram config. Check TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in .env");
   process.exit(1);
 }
 
-(async () => {
+const postToTelegram = async (message) => {
   const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
 
   try {
-    const response = await axios.post(url, {
+    const res = await axios.post(url, {
       chat_id: CHAT_ID,
-      text: `🧪 Test message from debug.js at ${new Date().toISOString()}`
-      // Don't set parse_mode here to avoid markdown issues
+      text: message,
+      parse_mode: "Markdown" // Remove this line if you're seeing Markdown errors
     });
-
-    console.log("✅ Telegram response:");
-    console.dir(response.data, { depth: null });
+    console.log("📤 Telegram message sent.");
   } catch (err) {
-    console.error("❌ Error sending Telegram message:");
-    if (err.response) {
-      console.error(err.response.data);
-    } else {
-      console.error(err.message);
-    }
+    console.error("❌ Telegram post failed:", err.response?.data || err.message);
   }
-})();
+};
+
+module.exports = { postToTelegram };
