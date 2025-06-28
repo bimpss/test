@@ -7,6 +7,8 @@ let retryCount = 0;
 function connectToTensor() {
   const socket = new WebSocket('wss://api.tensor.trade/socket');
 
+  console.log("🌐 Connecting to Tensor WebSocket...");
+
   socket.on('open', () => {
     console.log('✅ Connected to Tensor');
     retryCount = 0;
@@ -20,6 +22,9 @@ function connectToTensor() {
   });
 
   socket.on('message', (data) => {
+
+    console.log('📩 Received message from Tensor');
+
     const parsed = JSON.parse(data);
     if (parsed.type === 'sale') {
       const sale = parsed.data;
