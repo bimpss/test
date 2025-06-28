@@ -34,6 +34,11 @@ async function pollSales() {
 
     } catch (err) {
       console.error(`❌ Error polling Magic Eden [${slug}]:`, err.message);
+
+      if (err.response && err.response.status === 503) {
+        console.log("⏳ Magic Eden API returned 503. Delaying for 15 seconds...");
+        await new Promise(resolve => setTimeout(resolve, 15000));
+      }
     }
   }
 }
