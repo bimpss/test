@@ -7,6 +7,8 @@ let seen = new Set();
 async function pollSales() {
   console.log("🔄 Polling Magic Eden for sales...");
 
+  await postToTelegram(`🧪 Test message at ${new Date().toISOString()}`);
+
   for (const { slug } of magicEdenSlugs) {
     const url = `https://api-mainnet.magiceden.dev/v2/collections/${slug}/activities?offset=0&limit=5`;
 
@@ -38,7 +40,13 @@ async function pollSales() {
 🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})`;
 
 
-        await postToTelegram(msg);
+        try {
+          await postToTelegram(msg);
+          console.log("📤 Posted sale to Telegram.");
+        } catch (e) {
+          console.error("❌ Failed to post to Telegram:", e.message);
+        }
+
       }
 
       if (seen.size > 100) {
