@@ -33,15 +33,12 @@ async function pollSales() {
       console.error("❌ Error polling Magic Eden", err.message);
     }
 
-    console.log(`✅ Received ${sales.length} new sales from Magic Eden.`);
+    if (Array.isArray(sales)) {
+      console.log(`✅ Received ${sales.length} new sales from Magic Eden.`);
+    } else {
+      console.warn("⚠️ Warning: No sales array received from Magic Eden API.");
+    }
   }
-
-  if (Array.isArray(sales)) {
-    console.log(`✅ Received ${sales.length} new sales from Magic Eden.`);
-  } else {
-    console.warn("⚠️ Warning: No sales array received from Magic Eden API.");
-  }
-
 }
 
 setInterval(pollSales, 10000);
