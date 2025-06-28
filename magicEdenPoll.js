@@ -12,7 +12,18 @@ async function pollSales() {
 
     try {
       const res = await axios.get(url);
-      const buys = res.data.filter(tx => ["buyNow", "exchange", "sweep"].includes(tx.type));
+
+      const buys = res.data.filter(tx =>
+        (
+          (tx.type === "buyNow") ||
+          (tx.type === "exchange") ||
+          (tx.type === "sweep") ||
+          (tx.type === "bid" && tx.buyer && tx.seller)
+        ) &&
+        tx.tokenMint &&
+        tx.price
+      );
+
 
       console.log(`✅ [${slug}] ${buys.length} new sale(s)`);
 
@@ -20,10 +31,12 @@ async function pollSales() {
         if (seen.has(tx.signature)) continue;
         seen.add(tx.signature);
 
-        const msg = `💎 *Sale on Magic Eden*
+        const msg = `💎 *Sale on Magic Eden (Bid Accepted)*
 🖼️ Token: ${tx.tokenMint.slice(0, 6)}...
 💰 *${tx.price} SOL*
-🔗 [View](https://magiceden.io/item-details/${tx.tokenMint})`;
+👤 Buyer: \`${tx.buyer.slice(0, 4)}...${tx.buyer.slice(-4)}\`
+🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})`;
+
 
         await postToTelegram(msg);
       }
