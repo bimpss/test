@@ -7,7 +7,7 @@ let seen = new Set();
 async function pollSales() {
   console.log("🔄 Polling Magic Eden for sales...");
 
-  await postToTelegram(`🧪 Test message at ${new Date().toISOString()}`);
+  //await postToTelegram(`🧪 Test message at ${new Date().toISOString()}`); to debug
 
   for (const { slug } of magicEdenSlugs) {
     const url = `https://api-mainnet.magiceden.dev/v2/collections/${slug}/activities?offset=0&limit=5`;
@@ -57,10 +57,10 @@ async function pollSales() {
 
       if (err.response && err.response.status === 503) {
         console.log("⏳ Magic Eden API returned 503. Delaying for 15 seconds...");
-        await new Promise(resolve => setTimeout(resolve, 15000));
+        await new Promise(resolve => setTimeout(resolve, 100000));
       }
     }
   }
 }
 
-setInterval(pollSales, 10000);
+setInterval(pollSales, 50000);
