@@ -1,0 +1,15 @@
+{
+  "name": "solana-nft-salesbot-telegram",
+  "version": "1.0.0",
+  "description": "A bot that reports Solana NFT sales (Tensor + Magic Eden) to Telegram.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.0.3",
+    "node-telegram-bot-api": "^0.61.0",
+    "ws": "^8.13.0"
+  }
+}
