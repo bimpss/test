@@ -39,7 +39,6 @@ async function pollSales() {
 👤 Buyer: \`${tx.buyer.slice(0, 4)}...${tx.buyer.slice(-4)}\`
 🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})`;
 
-
         try {
           await postToTelegram(msg);
           console.log("📤 Posted sale to Telegram.");
