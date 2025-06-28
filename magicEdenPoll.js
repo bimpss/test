@@ -6,7 +6,7 @@ let seen = new Set();
 
 async function pollSales() {
   for (const { slug } of magicEdenSlugs) {
-    const url = \`https://api-mainnet.magiceden.dev/v2/collections/\${slug}/activities?offset=0&limit=5\`;
+    const url = `https://api-mainnet.magiceden.dev/v2/collections/${slug}/activities?offset=0&limit=5`;
     try {
       const res = await axios.get(url);
       const buys = res.data.filter(tx => tx.type === "buyNow");
@@ -15,10 +15,10 @@ async function pollSales() {
         if (seen.has(tx.signature)) continue;
         seen.add(tx.signature);
 
-        const msg = \`💎 *Sale on Magic Eden*
-🖼️ Token: \${tx.tokenMint.slice(0, 6)}...
-💰 *\${tx.price} SOL*
-🔗 [View](https://magiceden.io/item-details/\${tx.tokenMint})\`;
+        const msg = `💎 *Sale on Magic Eden*
+🖼️ Token: ${tx.tokenMint.slice(0, 6)}...
+💰 *${tx.price} SOL*
+🔗 [View](https://magiceden.io/item-details/${tx.tokenMint})`;
 
         await postToTelegram(msg);
       }
