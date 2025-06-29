@@ -48,7 +48,7 @@ async function pollSales() {
 
         const msg = `😲 *Sale on Magic Eden ([${tx.type}]) 😲*
 
-        🖼️ *${tokenName}*
+🖼️ *${tokenName}*
 💰 *${tx.price} SOL*
 
 🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint}) 🔍 [(View Full Res)](${tokenImg})
