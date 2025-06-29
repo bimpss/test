@@ -43,12 +43,15 @@ async function pollSales() {
           if (metaRes.data?.name) {
             tokenName = metaRes.data.name;
           }
+          if (metaRes.data?.image) {
+            tokenImg = metaRes.data.image;
+          }
         } catch (metaErr) {
           console.warn(`⚠️ Failed to fetch metadata for token ${tx.tokenMint}:`, metaErr.message);
         }
 
         const msg = `💎 *Sale on Magic Eden (${tx.type})*
-🖼️ *${tokenName}* [(View Full Res)](${metaRes.data.image})
+🖼️ *${tokenName}* [(View Full Res)](${tokenImg})
 💰 *${tx.price} SOL*
 👤 Buyer: \`${tx.buyer?.slice(0, 4)}...${tx.buyer?.slice(-4)}\`
 🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})
