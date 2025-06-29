@@ -46,8 +46,9 @@ async function pollSales() {
           console.warn(`⚠️ Failed to fetch metadata for token ${tx.tokenMint}:`, metaErr.message);
         }
 
-        const msg = `💎 *Sale on Magic Eden (${tx.type})*
-🖼️ *${tokenName}*
+        const msg = `😲 *Sale on Magic Eden ([${tx.type}]) 😲*
+
+        🖼️ *${tokenName}*
 💰 *${tx.price} SOL*
 
 🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint}) 🔍 [(View Full Res)](${tokenImg})
