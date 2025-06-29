@@ -51,7 +51,7 @@ async function pollSales() {
 🖼️ *${tokenName}*
 💰 *${tx.price} SOL*
 
-🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint}) 🔍 [(View Full Res)](${tokenImg})
+🔗 [(View on Magic Eden)](https://magiceden.io/item-details/${tx.tokenMint}) 🔍 [(View Full Res)](${tokenImg})
 
 *Buyer:*
 \`${tx.buyer}\`
