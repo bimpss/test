@@ -52,13 +52,13 @@ async function pollSales() {
 
 🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint}) 🔍 [(View Full Res)](${tokenImg})
 
-Buyer:
+*Buyer:*
 \`${tx.buyer}\`
-*[Solscan 🔗](https://solscan.io/account/${tx.buyer})*
+🔗 [Solscan](https://solscan.io/account/${tx.buyer})
 
-Seller:
+*Seller:*
 \`${tx.seller}\`
-*[Solscan 🔗](https://solscan.io/account/${tx.seller})*
+🔗 [Solscan](https://solscan.io/account/${tx.seller})
 
 🄳🄾 🅈🄾🅄 🫵 🄽🄴🄴🄳 🄰 🄱🄾🅃 🄻🄸🄺🄴 🅃🄷🄸🅂 🙋
 🅂🄿🄴🄰🄺 🅃🄾 🄱🄸🄼🄿🅂 🫡
