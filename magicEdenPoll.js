@@ -53,10 +53,11 @@ async function pollSales() {
         const msg = `💎 *Sale on Magic Eden (${tx.type})*
 🖼️ *${tokenName}* [(View Full Res)](${tokenImg})
 💰 *${tx.price} SOL*
-👤 Buyer: \`${tx.buyer?.slice(0, 4)}...${tx.buyer?.slice(-4)}\`
+👤 Buyer: ${tx.buyer} [Solscan](https://solscan.io/account/${tx.buyer})
 🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})
 
-ᴺᵉᵉᵈ ᵃ ᵇᵒᵗ ˡⁱᵏᵉ ᵗʰⁱˢ ⁻ ˢᵖᵉᵃᵏ ᵗᵒ ᵇⁱᵐᵖˢ
+🅽🅴🅴🅳 🅰 🅱🅾🆃 🅻🅸🅺🅴 🆃🅷🅸🆂 ? 
+🆂🅿🅴🅰🅺 🆃🅾 🅱🅸🅼🅿🆂.
 `;
 
 
