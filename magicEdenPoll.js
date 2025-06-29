@@ -33,10 +33,6 @@ async function pollSales() {
         if (seen.has(tx.signature)) continue;
         seen.add(tx.signature);
 
-
-
-
-
         let tokenName = tx.tokenMint.slice(0, 6) + '...';
         try {
           const metaRes = await axios.get(`https://api-mainnet.magiceden.dev/v2/tokens/${tx.tokenMint}`);
@@ -51,10 +47,18 @@ async function pollSales() {
         }
 
         const msg = `💎 *Sale on Magic Eden (${tx.type})*
-🖼️ *${tokenName}* [(View Full Res)](${tokenImg})
+🖼️ *${tokenName}*
 💰 *${tx.price} SOL*
-👤 Buyer: ${tx.buyer} [Solscan](https://solscan.io/account/${tx.buyer})
-🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})
+
+Buyer:
+\`${tx.buyer}\`
+*[Solscan 🔗](https://solscan.io/account/${tx.buyer})*
+
+Seller:
+\`${tx.seller}\`
+*[Solscan 🔗](https://solscan.io/account/${tx.seller})*
+
+🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint}) 🔍 [(View Full Res)](${tokenImg})
 
 🄳🄾 🅈🄾🅄 🫵 🄽🄴🄴🄳 🄰 🄱🄾🅃 🄻🄸🄺🄴 🅃🄷🄸🅂 🙋
 🅂🄿🄴🄰🄺 🅃🄾 🄱🄸🄼🄿🅂 🫡
