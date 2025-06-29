@@ -33,11 +33,28 @@ async function pollSales() {
         if (seen.has(tx.signature)) continue;
         seen.add(tx.signature);
 
-        const msg = `💎 *Sale on Magic Eden (Bid Accepted)*
-🖼️ Token: ${tx.tokenMint.slice(0, 6)}...
+
+
+
+
+        let tokenName = tx.tokenMint.slice(0, 6) + '...';
+        try {
+          const metaRes = await axios.get(`https://api-mainnet.magiceden.dev/v2/tokens/${tx.tokenMint}`);
+          if (metaRes.data?.name) {
+            tokenName = metaRes.data.name;
+          }
+        } catch (metaErr) {
+          console.warn(`⚠️ Failed to fetch metadata for token ${tx.tokenMint}:`, metaErr.message);
+        }
+
+        const msg = `💎 *Sale on Magic Eden (${tx.type})*
+🖼️ *${tokenName}*
 💰 *${tx.price} SOL*
-👤 Buyer: \`${tx.buyer.slice(0, 4)}...${tx.buyer.slice(-4)}\`
-🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})`;
+👤 Buyer: \`${tx.buyer?.slice(0, 4)}...${tx.buyer?.slice(-4)}\`
+🔗 [View on Magic Eden](https://magiceden.io/item-details/${tx.tokenMint})
+Need a bot like this? Speak to bimps.
+`;
+
 
         try {
           await postToTelegram(msg);
